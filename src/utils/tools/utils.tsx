@@ -1,34 +1,30 @@
 import { ReactNode } from 'react';
 import Image, { ImageProps, StaticImageData } from 'next/image';
 
-import { IUrlImage } from '@/api/types/UI';
-import { IQueryBalanceTypeOperation, IResponseBalanceTypeOperation, ResultKeysMap } from '@/api/types/transaction';
+import { IBodyCardDetails, ICardBodyCustom, IUrlImage } from '@/api/types/UI';
+import { IBalanceTypeWithMappedResultKeys, IQueryBalanceTypeOperation, IResponseBalanceTypeOperation, ResultKeysMap } from '@/api/types/transaction';
+import SVGComponent from '@/components/UI/SvgFC';
 
 const getDateISO = (date: Date | string): string => {
   const fecha = new Date(date);
 
-  // Obtener los elementos de la fecha
-  const año = fecha.getFullYear(); // Año (ej. 2023)
-  const mes = fecha.getMonth() + 1; // Mes (0-11, por eso se suma 1) (ej. 7)
-  const dia = fecha.getDate(); // Día del mes (ej. 14)
+  const año = fecha.getFullYear();
+  const mes = fecha.getMonth() + 1;
+  const dia = fecha.getDate();
 
-  // Formatear la fecha en el formato ISO 8601 (YYYY-MM-DD)
   const fechaISO = `${año}-${mes.toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
 
   return fechaISO;
 };
 
-const getDateCutomeString = (date: string | Date): string => {
-  // Crear un objeto de fecha a partir de la cadena
+const getDateCutomeString = (date: string | Date, type: 'mobile' | 'desktop'): string => {
   const fechaHora = new Date(date);
 
-  // Obtener el día, mes y año
   const dia = fechaHora.getDate();
   const mes = fechaHora.toLocaleString('default', { month: 'long' });
   const año = fechaHora.getFullYear();
 
-  // Crear la cadena de texto en el formato deseado
-  const fechaCustom = dia + ' de ' + mes + ' ' + año;
+  const fechaCustom = dia + ' de ' + mes + (type === 'desktop' ? ' ' + año : '');
   return fechaCustom;
 };
 
@@ -124,7 +120,78 @@ const animationStep = (step: number, previous: number, valuePast?: number) => {
   }
 };
 
-interface IPropietariesContentHtml extends HTMLDivElement {}
+const buildArrayResultCard = (
+  data: IResponseBalanceTypeOperation,
+  arrayStructure: ICardBodyCustom[],
+  arrayKeys: Array<keyof ResultKeysMap[IQueryBalanceTypeOperation['operation_area']]>
+): ICardBodyCustom[][] => {
+  const result: ICardBodyCustom[][] = [];
+  data.results.forEach((body: IBalanceTypeWithMappedResultKeys) => {
+    result.push(
+      arrayStructure.flatMap((data) => ({
+        ...data,
+        body: data.body.flatMap((item) => ({
+          ...item,
+          value: item.fieldfind !== 'customField' && arrayKeys ? body[getValueRowCardData(arrayKeys, item)] : item.value,
+        })),
+      }))
+    );
+  });
+  return result;
+};
+
+const getValueRowCardData = (keys: Array<keyof ResultKeysMap[IQueryBalanceTypeOperation['operation_area']]>, card: IBodyCardDetails) => {
+  const key: keyof ResultKeysMap[IQueryBalanceTypeOperation['operation_area']] = keys.filter((key) => key === card.fieldfind)[0];
+  return key;
+};
+
+const child = (data: ICardBodyCustom[][], classNamePT: string): React.ReactNode => {
+  return (
+    <>
+      {data.map((card, i) => (
+        <div key={i} className={classNamePT}>
+          {card.map((dataItem, index) => {
+            if (dataItem.htmlCustomParent === 'div') {
+              return (
+                <div className={dataItem.className} key={index}>
+                  {dataItem.body.map((item, j) => {
+                    if (item.htmlCustomElementType === 'span') {
+                      return (
+                        <span
+                          key={j}
+                          className={item.classNames}
+                          style={{
+                            order: `${item.order}`,
+                          }}>
+                          {item.value}
+                        </span>
+                      );
+                    } else if (item.htmlCustomElementType === 'img') {
+                      return <SVGComponent key={j} path="UI" src={item.value} />;
+                    } else if (item.htmlCustomElementType === 'p') {
+                      return (
+                        <p key={j} className={item.classNames}>
+                          {item.value}
+                        </p>
+                      );
+                    } else {
+                      return <div key={j} style={{
+                        order: `${item.order}`
+                      }}>{item.children && item.children(item.value)}</div>;
+                    }
+                  })}
+                </div>
+              );
+            }
+            return <></>;
+          })}
+        </div>
+      ))}
+    </>
+  );
+};
+
+interface IPropietariesContentHtml extends HTMLDivElement { }
 interface IIconShow {
   icon: StaticImageData; // Change ReactElement to StaticImageData if you're using Next.js 12 or later
   imageProps: Omit<ImageProps, 'layout'>;
@@ -138,4 +205,7 @@ export {
   CreateIcon,
   changeStyleStepAnimation,
   animationStep,
+  buildArrayResultCard,
+  getValueRowCardData,
+  child,
 };

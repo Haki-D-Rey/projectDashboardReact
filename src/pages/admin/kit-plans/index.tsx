@@ -86,7 +86,7 @@ const KitPlans: NextPageWithLayout = () => {
       totalPages: 0,
       setTotalPages: () => 0,
     },
-    onCustomChange: () => {},
+    onCustomChange: () => { },
     styleCustom: ['p-datatable', 'p-datatable-tbody-transparent', 'p-datatable-thead'],
   });
   const [expanded, setExpanded] = useState(false);
@@ -351,7 +351,7 @@ const KitPlans: NextPageWithLayout = () => {
           if (response.data) {
             const blob = new Blob([response.data]);
             const a = document.createElement('a');
-            a.download = `Historial de balance ${getDateCutomeString(new Date())}.csv`;
+            a.download = `Historial de balance ${getDateCutomeString(new Date(), 'desktop')}.csv`;
             a.href = URL.createObjectURL(blob);
             const clickEvt = new MouseEvent('click', {
               view: window,
@@ -373,7 +373,7 @@ const KitPlans: NextPageWithLayout = () => {
     const updatedBody = data.results.map((item: any) => ({
       ...item,
       amount: `$ ${item.amount}`,
-      object_date: getDateCutomeString(item.object_date),
+      object_date: getDateCutomeString(item.object_date, useMobile ? 'mobile' : 'desktop'),
     }));
     setTable((prevTable) => ({
       ...prevTable,
@@ -476,7 +476,7 @@ const KitPlans: NextPageWithLayout = () => {
 
     if (data.results.length) {
       data.results.forEach((item: any) => {
-        item.object_date = getDateCutomeString(item.object_date);
+        item.object_date = getDateCutomeString(item.object_date, 'mobile');
       });
     }
 
@@ -574,7 +574,7 @@ const KitPlans: NextPageWithLayout = () => {
     }
   }, [data]);
 
-  useEffect(() => {}, [table]);
+  useEffect(() => { }, [table]);
 
   useEffect(() => {
     setTable((prevTable) => ({
@@ -612,9 +612,8 @@ const KitPlans: NextPageWithLayout = () => {
               router.push('/welcome');
             },
           }}
-          className={`relative flex w-full flex-row ${
-            (useDesktop && isExtended && !useMobile) || (expanded && useDesktop) ? 'justify-start' : 'justify-center'
-          } justify-items-stretch text-center`}
+          className={`relative flex w-full flex-row ${(useDesktop && isExtended && !useMobile) || (expanded && useDesktop) ? 'justify-start' : 'justify-center'
+            } justify-items-stretch text-center`}
         />
         {!useIsMobile() && showCustomButtonUI([dowloadButton])}
       </div>

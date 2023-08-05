@@ -8,7 +8,7 @@ enum PageLinks {
 
 export enum PageDashboardLinks {
   Dashboard = '/admin',
-  History = '/admin/history',
+  History = '/admin/transactions',
   Profits = '/admin/profits',
   Investments = '/admin/investments',
   InvestmentsNew = '/admin/investments/new',

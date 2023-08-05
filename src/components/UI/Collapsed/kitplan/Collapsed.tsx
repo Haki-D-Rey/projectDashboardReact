@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 
-import {collapseContext} from '@/context/CollapseProvider'
+import { collapseContext } from '@/context/CollapseProvider'
 
 interface CollapsedProps {
   childrenTitle: React.ReactNode;
@@ -11,12 +11,12 @@ function Collapsed({
   showCollapsed,
   childrenTitle,
   childrenContent,
-}: CollapsedProps & { showCollapsed: boolean | undefined;  }) {
+}: CollapsedProps & { showCollapsed: boolean | undefined; }) {
 
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const {collapsedState, setCollapsedState} = useContext(collapseContext);
+  const { collapsedState, setCollapsedState } = useContext(collapseContext);
 
-  const handleOutsideClick = (event : MouseEvent) => {
+  const handleOutsideClick = (event: MouseEvent) => {
     if (containerRef.current && !containerRef.current?.contains(event.target as Node)) {
       setCollapsedState(false);
     }
@@ -31,12 +31,12 @@ function Collapsed({
   }, []);
 
   return (
-    <div 
-      ref={containerRef} 
-      className={`collapse ${ collapsedState ? "collapse-open" : "collapse-close"} w-full rounded-none bg-transparent`} 
-      >
-      <input type="checkbox" name="my-accordion-1" className='peer'  onClick={() => setCollapsedState(!collapsedState)}/> 
-      
+    <div
+      ref={containerRef}
+      className={`collapse ${collapsedState ? "collapse-open" : "collapse-close"} w-full rounded-none bg-transparent`}
+    >
+      <input type="checkbox" name="my-accordion-1" className='peer' onClick={() => setCollapsedState(!collapsedState)} />
+
       {childrenTitle}
 
       <div className="collapse-content flex flex-col gap-2">

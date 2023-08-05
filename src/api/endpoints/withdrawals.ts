@@ -1,4 +1,4 @@
-import { ApiClientV1 } from '../index';
+import {ApiClientV1} from '../index';
 
 import type { IResponseCreateWithdrawal, IMutationCreateWithdrawalArgs } from '../types/withdrawal';
 

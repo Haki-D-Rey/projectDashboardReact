@@ -1,5 +1,4 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
-
 import { useSession } from 'next-auth/react';
 
 import {
@@ -92,7 +91,17 @@ const useGetTransactionALL = (params: IQueryBalanceTypeOperation): UseQueryResul
 
 const useGetQueryBalanceTypeOperation = (params: IQueryBalanceTypeOperation): UseQueryResult<IResponseBalanceTypeOperation> => {
   const data = useQuery<IResponseBalanceTypeOperation>(['user-typeoperation-balance', params], async () => {
-    return await getBalanceTypeOperation(params);
+    try {
+      return await getBalanceTypeOperation(params);
+    } catch (error) {
+      const data: IResponseBalanceTypeOperation = {
+        count: 1,
+        next: '',
+        previous: '',
+        results: [],
+      };
+      return data;
+    }
   });
 
   return data;

@@ -269,7 +269,7 @@ const WithDrawals: NextPageWithLayout = () => {
           if (response.data) {
             const blob = new Blob([response.data]);
             const a = document.createElement('a');
-            a.download = `Historial de balance ${getDateCutomeString(new Date())}.csv`;
+            a.download = `Historial de balance ${getDateCutomeString(new Date(), 'desktop')}.csv`;
             a.href = URL.createObjectURL(blob);
             const clickEvt = new MouseEvent('click', {
               view: window,
@@ -290,7 +290,7 @@ const WithDrawals: NextPageWithLayout = () => {
     const updatedBody = data.results.map((item: any) => ({
       ...item,
       amount: `$ ${item.amount}`,
-      object_date: getDateCutomeString(item.object_date),
+      object_date: getDateCutomeString(item.object_date, useMobile ? 'mobile' : 'desktop'),
     }));
     setTable((prevTable) => ({
       ...prevTable,
@@ -393,7 +393,7 @@ const WithDrawals: NextPageWithLayout = () => {
 
     if (data.results.length) {
       data.results.forEach((item: any) => {
-        item.object_date = getDateCutomeString(item.object_date);
+        item.object_date = getDateCutomeString(item.object_date, 'mobile');
       });
     }
 

@@ -107,4 +107,5 @@ export interface IBodyCardDetails {
   style: CSSProperties | {};
   value: string;
   fieldfind: string | 'customfield';
+  children?: (value?: string) => ReactNode;
 }
