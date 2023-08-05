@@ -21,7 +21,7 @@ export enum PageDashboardLinks {
   Benefits = '/admin/benefits',
   Streaming = '/admin/streaming',
   News = '/admin/news',
-  Confounder = '/admin/confounder',
+  Confounder = '/admin/cofounder',
   Trading = '/admin/trading-plans',
 }
 

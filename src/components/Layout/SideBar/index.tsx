@@ -47,9 +47,8 @@ const SideBar: FC<ISideBarProps> = ({ visible, isExtended, isMobileOrTablet, han
       onClick={isMobileOrTablet ? handleSideBar : undefined}>
       <nav
         onClick={(e) => e.stopPropagation()}
-        className={`${visible ? '' : ''} ease-in ${
-          visible ? 'static ' : 'fixed mt-20 flex h-full flex-col justify-around bg-transparent lg:mt-0'
-        } z-30 w-10/12 ${width} transform overflow-y-hidden transition duration-300 lg:static  lg:inset-0 lg:translate-x-0`}>
+        className={`${visible ? '' : ''} ease-in ${visible ? 'static ' : 'fixed mt-20 flex h-full flex-col justify-around bg-transparent lg:mt-0'
+          } z-30 w-10/12 ${width} transform overflow-y-hidden transition duration-300 lg:static  lg:inset-0 lg:translate-x-0`}>
         <div className={`mx-auto flex flex-col items-${!isExtended ? 'start pl-2' : 'center'} w-full gap-2  text-gray-400`}>
           <div className={!isExtended ? 'rotate-90' : ''}>
             <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
@@ -59,7 +58,7 @@ const SideBar: FC<ISideBarProps> = ({ visible, isExtended, isMobileOrTablet, han
 
         <ul className="text-normal">
           <ItemLink icon={ResumenGIcon} {...{ isExtended, isMobileOrTablet }} text="Resumen General" href={PageDashboardLinks.Dashboard} />
-          <ItemLink icon={TransactionIcon} {...{ isExtended, isMobileOrTablet }} text="Transacciones" href={''} />
+          <ItemLink icon={TransactionIcon} {...{ isExtended, isMobileOrTablet }} text="Transacciones" href={PageDashboardLinks.Transactions} />
           <ItemLink icon={cofunderIcon} {...{ isExtended, isMobileOrTablet }} text="Confounder" href={PageDashboardLinks.Confounder} />
           <ItemLink icon={<MdOutlineInsights />} {...{ isExtended, isMobileOrTablet }} text="Kit Plans" href={PageDashboardLinks.KitPlans} />
           <ItemLink icon={TradingPlanIcon} {...{ isExtended, isMobileOrTablet }} text="Planes de Trading" href={PageDashboardLinks.Trading} />
