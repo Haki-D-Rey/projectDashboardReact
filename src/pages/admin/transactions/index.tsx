@@ -112,20 +112,20 @@ const Transactions: NextPageWithLayout = () => {
     style: {},
     dataTableProps: {},
     columnProps: {
-      body: (value): ReactNode => {
-        return (
-          <div className='flex flex-row items-center gap-x-[0.15rem]'>
-            {CreateIcon({
-              icon: value === 'VERIFIED' ? iconVerify : iconNotVerify, imageProps: {
-                alt: 'iconVerify',
-                src: '',
-                width: 18,
-                height: 18
-              }
-            })}
-          </div>
-        )
-      },
+      // body: (value): ReactNode => {
+      //   return (
+      //     <div className='flex flex-row items-center gap-x-[0.15rem]'>
+      //       {CreateIcon({
+      //         icon: value === 'VERIFIED' ? iconVerify : iconNotVerify, imageProps: {
+      //           alt: 'iconVerify',
+      //           src: '',
+      //           width: 18,
+      //           height: 18
+      //         }
+      //       })}
+      //     </div>
+      //   )
+      // },
       pt: {
         headerCell: {
           className: 'border-[1px] border-[#2E8E9E] border-l-0 border-r-0 first:border-l-[1px] last:border-r-[1px]',
