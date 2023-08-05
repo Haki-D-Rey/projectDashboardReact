@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'prime-theme';
+@import '@/components/UI/Password/style';
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+
+.p-component {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.p-card {
+  .p-card-body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .p-card-content {
+    padding: 0;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .p-datatable {
+    width: 90%;
+  }
+}
+
+.p-dialog {
+  border: none;
+
+  .p-dialog-header,
+  .p-dialog-content {
+    background: #1F222B !important;
+    background-color: #1F222B !important;
+    border: none;
+  }
+}
+
+.p-organizationchart .p-organizationchart-node-content {
+  background: #071426 !important;
+  background-color: #071426 !important;
+  border: 1px solid #204887 !important;
+  border-radius: 1rem;
+}
+
+.p-organizationchart-lines {
+  color: #204887 !important;
+}
+
+.swal2-container {
+  z-index: 3000 !important;
+}
+
+.p-dropdown {
+  position: relative;
+}
+
+.p-dropdown-items-wrapper {
+  position: absolute;
+  background-color: #282936; //040D19
+  width: 270px;
+  height: 190px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -1%);
+}
+
+@media (min-width: 769px) {
+  .p-dropdown-items-wrapper {
+    width: 100%;
+    height: 300px;
+    transform: translate(-50%, 1%);
+  }
+}
+
+.swal2-title.titleClass {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.swal2-htmlContainer {
+  color: red;
+
+  font-size: 6px;
+  font-weight: bold;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ajusta los valores según tu preferencia */
+}
+
+
+// TODO THIS PART FOR WHAT THIS MODAL IS RESPONSIVE: .swal2-htmlContainer .swal2-title.titleClass

@@ -1,0 +1,42 @@
+name: GitHub Pages
+'on':
+  push:
+    branches:
+      - develop
+jobs:
+  develop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+      - run: yarn install
+      #- run: npm install --package-lock-only
+      #- run: npm ci
+      #- run: npm run build --if-present
+      - run: yarn build
+      #- run: npm test
+      # Get repo name
+      - name: Get repo name
+        shell: bash
+        run: echo "REPO_NAME=${{ github.event.repository.name }}" >> $GITHUB_ENV
+
+      # Executing ssh commands on the app server
+      - name: Execute remote ssh commands
+        uses: appleboy/ssh-action@master
+        # Get the secrets for deployments
+        with:
+          host: ${{ secrets.ACTION_HOST_WEBAPPS_ST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: ${{ secrets.ACTION_PORT }}
+          script: |
+            cd /var/www/${{ env.REPO_NAME }}
+            sudo git checkout -f
+            sudo git pull origin
+            sudo yarn install
+            sudo yarn build
+            sudo pm2 restart 7

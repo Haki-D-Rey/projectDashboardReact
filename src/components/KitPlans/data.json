@@ -1,0 +1,93 @@
+{
+  "basic": [
+    {
+      "name": "Kit Inicial",
+      "price": "20",
+      "type": "Año",
+      "benefits": [
+        "Streaming con más de 30 mil peliculas, más de 4 mil series y TV abierta por 1 mes.",
+        "Embudo de venta.",
+        "Academia de marketing basico."
+      ]
+    },
+    {
+      "name": "Kit Básico",
+      "price": "50",
+      "type": "Año",
+      "benefits": [
+        "Streaming con más de 30 mil peliculas, más de 4 mil series y TV abierta por 1 mes.",
+        "Embudo de venta.",
+        "Academia de marketing basico."
+      ]
+    },
+    {
+      "name": "Kit Estándar",
+      "price": "100",
+      "type": "Año",
+      "benefits": [
+        "Streaming con más de 30 mil peliculas, más de 4 mil series y TV abierta por 1 mes.",
+        "Netflix por 1 mes en 4 dispositivos.",
+        "Embudo de venta.",
+        "Academia de marketing basico."
+      ]
+    }
+  ],
+  "intermediate": [
+    {
+      "name": "Kit Intermedio",
+      "price": "200",
+      "type": "Año",
+      "benefits": [
+        "Streaming con más de 30 mil peliculas, más de 4 mil series y TV abierta por 1 mes.",
+        "Netflix por 1 mes en 4 dispositivos.",
+        "Disney por 1 mes en 4 dispositivos.",
+        "HBO por 1 mes.",
+        "Embudo de venta.",
+        "Academia de marketing basico."
+      ]
+    },
+    {
+      "name": "Kit Avanzado",
+      "price": "400",
+      "type": "Año",
+      "benefits": [
+        "Streaming con más de 30 mil peliculas, más de 4 mil series y TV abierta por 1 mes.",
+        "Netflix por 1 mes en 4 dispositivos.",
+        "Disney por 1 mes en 4 dispositivos.",
+        "HBO por 1 mes.",
+        "Embudo de venta.",
+        "Academia de marketing basico."
+      ]
+    },
+    {
+      "name": "Kit Premium",
+      "price": "800",
+      "type": "Año",
+      "benefits": [
+        "Streaming con más de 30 mil peliculas, más de 4 mil series y TV abierta por 1 mes.",
+        "Netflix por 1 mes en 4 dispositivos.",
+        "Disney por 1 mes en 4 dispositivos.",
+        "HBO por 1 mes.",
+        "Spotify por 1 mes.",
+        "Embudo de venta.",
+        "Academia de marketing basico."
+      ]
+    }
+  ],
+  "advanced": [
+    {
+      "name": "Kit Ultra Premium",
+      "price": "1000",
+      "type": "Año",
+      "benefits": [
+        "Streaming con más de 30 mil peliculas, más de 4 mil series y TV abierta por 1 mes.",
+        "Netflix por 1 mes en 4 dispositivos.",
+        "Disney por 1 mes en 4 dispositivos.",
+        "HBO por 1 mes.",
+        "Spotify por 1 mes.",
+        "Embudo de venta.",
+        "Academia de marketing avanzado VIP."
+      ]
+    }
+  ]
+}

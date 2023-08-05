@@ -1,0 +1,30 @@
+.p-button {
+    border: 2px solid white;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    border-radius: 15px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    background: #2E8E9E;
+    padding: 0;
+}
+
+.p-button-noborder {
+    border: none;
+    // border: 2px solid white;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    // border-radius: 15px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    text-align: center;
+    justify-content: center;
+    position: relative;
+    width: 170px;
+    background: #2E8E9E;
+    padding: 0 1rem;
+}

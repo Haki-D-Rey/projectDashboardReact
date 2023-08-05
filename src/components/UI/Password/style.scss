@@ -1,0 +1,24 @@
+:host ::ng-deep {
+
+    .p-inputtext {
+        font-size: 1rem;
+    }
+
+    @media only screen and (min-width: 1024px) {
+        .p-inputtext {
+            font-size: 5rem;
+        }
+    }
+}
+
+input::placeholder {
+    opacity: 0.5;
+    font-size: 14px;
+}
+
+
+@media only screen and (min-width:1280px) {
+    input::placeholder {
+        font-size: 18px;
+    }
+}

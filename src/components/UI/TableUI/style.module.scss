@@ -1,0 +1,80 @@
+.p-datatable {
+    table {
+        border-collapse: separate !important;
+        border-spacing: 0 0.3rem !important;
+    }
+}
+
+.p-datatable-thead {
+    th {
+        border: 1px solid #3e4053 !important;
+        border-width: 0 0 1px 0 !important;
+        padding: 10px;
+        background: #2E8E9E !important;
+        font-weight: 700 !important;
+        color: white;
+        margin: auto;
+    }
+}
+
+
+.p-datatable-thead-transparent {
+    thead {
+        th {
+            background: transparent !important;
+            font-weight: 700 !important;
+            color: white;
+            padding: 10px;
+            border-top: 1px solid #2E8E9E;
+            border-bottom: 1px solid #2E8E9E;
+
+            &:first-child {
+                border-left: 1px solid #2E8E9E;
+            }
+
+            &:last-child {
+                border-right: 1px solid #2E8E9E;
+            }
+        }
+
+    }
+
+}
+
+.p-datatable-tbody-transparent {
+
+    tr {
+        width: 100% !important;
+
+        td {
+            padding: 1rem;
+            border-top: 1px solid #2E8E9E;
+            border-bottom: 1px solid #2E8E9E;
+            color: white;
+
+            &:first-child {
+                border-left: 1px solid #2E8E9E;
+            }
+
+            &:last-child {
+                border-right: 1px solid #2E8E9E;
+            }
+        }
+    }
+}
+
+.p-datatable-tbody {
+    tr {
+        width: 100% !important;
+        border: 3px solid #111318 !important;
+        border-width: 3px 0 3px 0 !important;
+
+        td {
+            padding: 1rem !important;
+            margin: 80px 0 !important;
+            color: white !important;
+            background-color: #1F222B !important;
+            text-align: center !important;
+        }
+    }
+}

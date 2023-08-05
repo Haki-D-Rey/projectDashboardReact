@@ -1,0 +1,78 @@
+{
+  "Binance": [
+    {
+      "coin": "USDT",
+      "network": "TRC20",
+      "address": "TKpmV5Z7uBwYa1W2SvicAk6vjW3ziPZJ9q"
+    },
+    {
+      "coin": "USDT",
+      "network": "ERC20",
+      "address": "0x5d82258c800efb9f32c00fafa9b7f6dfe08e735f"
+    },
+    {
+      "coin": "USDT",
+      "network": "BEP20",
+      "address": "0x5d82258c800efb9f32c00fafa9b7f6dfe08e735f"
+    },
+    {
+      "coin": "BUSD",
+      "network": "TRC20",
+      "address": "TKpmV5Z7uBwYa1W2SvicAk6vjW3ziPZJ9q"
+    },
+    {
+      "coin": "BUSD",
+      "network": "ERC20",
+      "address": "0x5d82258c800efb9f32c00fafa9b7f6dfe08e735f"
+    },
+    {
+      "coin": "BUSD",
+      "network": "BEP20",
+      "address": "0x5d82258c800efb9f32c00fafa9b7f6dfe08e735f"
+    }
+  ],
+  "KuCoin": [
+    {
+      "coin": "USDT",
+      "network": "TRC20",
+      "address": "TBKBd4D8ozzfU4GhGdtYceJWY1fF5pU4Hk"
+    },
+    {
+      "coin": "USDT",
+      "network": "ERC20",
+      "address": "0xd4f5f3ad55fa78cd34b2c54c935ddb8c8ef689d5"
+    },
+    {
+      "coin": "BUSD",
+      "network": "BEP20",
+      "address": "0xd4f5f3ad55fa78cd34b2c54c935ddb8c8ef689d5"
+    },
+    {
+      "coin": "BUSD",
+      "network": "ERC20",
+      "address": "0x8aa40ad4606040652ccc0d96c7196e0ba59169ff"
+    }
+  ],
+  "Coinbase": [
+    {
+      "coin": "USDT",
+      "network": "ERC20",
+      "address": "0xC71E6cF7B599b04Ac9233e01e11BDf6ed2De7a55"
+    },
+    {
+      "coin": "USDT",
+      "network": "ERC20",
+      "address": "0xC71E6cF7B599b04Ac9233e01e11BDf6ed2De7a55"
+    },
+    {
+      "coin": "USDC",
+      "network": "ERC20",
+      "address": "0xEb30B52bF99409D686E481e0B2f73EEcc08c0133"
+    },
+    {
+      "coin": "BUSD",
+      "network": "ERC20",
+      "address": "0x4EC08D9E8e77AaBD7f9ca85737Ed41BCe23C440E"
+    }
+  ]
+}
