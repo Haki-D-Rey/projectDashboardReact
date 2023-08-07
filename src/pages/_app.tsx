@@ -21,7 +21,7 @@ import type { AppProps } from 'next/app';
 import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import '@/styles/main.scss';
-import { ApiClientV1, ApiClientV2 } from '../api/index';
+import { ApiClientV2, ApiClientV1 } from '../api/index';
 
 const queryClient = new QueryClient({
   defaultOptions: {

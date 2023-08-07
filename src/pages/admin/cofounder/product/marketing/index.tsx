@@ -13,7 +13,7 @@ import { IButtonUI, ICardBodyCustom, ITableCustomUI, IUrlImage } from '@/api/typ
 import { IQueryBalanceTypeOperation, IResponseBalanceTypeOperation, ResultKeysMap } from '@/api/types/transaction';
 
 //Utils
-import { buildArrayResultCard, child, createDivTextEmptyData, createEmptyRowArrayCustom, getDateCutomeString, getDateISO } from '@/utils/tools/utils';
+import { createDivTextEmptyData, createEmptyRowArrayCustom, getDateCutomeString, getDateISO } from '@/utils/tools/utils';
 import { twMerge } from 'tailwind-merge';
 import useMediaQuery, { useIsMobile } from '@/hooks/useMediaQuery.hook';
 
@@ -28,16 +28,14 @@ import CardUI from '@/components/UI/CardUI';
 //Services
 import { useGetQueryBalanceTypeOperation } from '@/api/hooks/queries/transaction.hook';
 import { getBalanceTypeOperationDonwload } from '@/api/endpoints/transactions';
-
-//Redux
 import { toogleExtendedMenu, getExtendedMenu } from '@/redux/features/appSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux.hook';
 
 type calendarProps = React.ComponentProps<typeof Calendar>;
 
-const BalanceMarketing: NextPageWithLayout = () => {
+const ProductMarketing: NextPageWithLayout = () => {
   const router = useRouter();
-  const [useMobile, useTablet] = [useIsMobile(), useMediaQuery('(min-width: 768px)')];
+  const [useMobile, useDesktop] = [useIsMobile(), useMediaQuery('(max-width: 1280px)')];
   const dispatch = useAppDispatch();
   const isExtended = useAppSelector(getExtendedMenu);
 
@@ -46,10 +44,9 @@ const BalanceMarketing: NextPageWithLayout = () => {
     page: '1',
   });
   const [date, setDate] = useState<string | Date | Date[] | null>(null);
-  const { data, isLoading, isError } = useGetQueryBalanceTypeOperation(params);
+  const { data, isLoading } = useGetQueryBalanceTypeOperation(params);
   const donwloadService = useMutation(getBalanceTypeOperationDonwload);
   const [loading, setLoading] = useState<boolean>(false);
-  const [updateTable, setUpdateTable] = useState<boolean>(false);
   const [table, setTable] = useState<ITableCustomUI>({
     data: {
       header: [
@@ -66,35 +63,35 @@ const BalanceMarketing: NextPageWithLayout = () => {
         previous: '',
         results: [
           {
-            object_date: '2021-05-27T16:17:19.257389Z',
-            trimester: '1',
-            product: 'Publicidad',
+            object_date: '21 jun 2015',
+            trimester: 'yes',
+            product: 'Dashboard',
             amount: '180$',
-            description: 'Publicidad - % ganancias Enero',
+            description: 'El ROI Promedio de ganancia 85% - 500$',
             related_balance_post_operation: '900$',
           },
           {
-            object_date: '2014-05-27T16:17:19.257389Z',
-            trimester: '2',
-            product: 'Publicidad',
+            object_date: '15 jun 2015',
+            trimester: 'yes',
+            product: 'Dashboard',
             amount: '180$',
-            description: 'Publicidad - % ganancias Enero',
+            description: 'El ROI Promedio de ganancia 85% - 500$',
             related_balance_post_operation: '900$',
           },
           {
-            object_date: '2006-05-21T16:17:19.257389Z',
-            trimester: '1',
-            product: 'Publicidad',
+            object_date: '20 jun 2015',
+            trimester: 'yes',
+            product: 'Dashboard',
             amount: '180$',
-            description: 'Publicidad - % ganancias Enero',
+            description: 'El ROI Promedio de ganancia 85% - 500$',
             related_balance_post_operation: '900$',
           },
           {
-            object_date: '2014-09-07T16:17:19.257389Z',
-            trimester: '4',
-            product: 'Publicidad',
+            object_date: '28 ene 2015',
+            trimester: 'yes',
+            product: 'Dashboard',
             amount: '180$',
-            description: 'Publicidad - 50% ganancias Enero',
+            description: 'El ROI Promedio de ganancia 85% - 500$',
             related_balance_post_operation: '900$',
           },
         ],
@@ -114,27 +111,7 @@ const BalanceMarketing: NextPageWithLayout = () => {
       },
     },
     style: {},
-    dataTableProps: {
-      pt: {
-        headerRow: {
-          role: 'row',
-          className: 'bg-[#FFF]'
-        }
-      }
-    },
-    columnProps: {
-      pt: {
-        headerCell: {
-          className: 'border-0 border-[#2E8E9E] bg-[#2E8E9E]'
-        },
-        headerContent: {
-          className: 'flex justify-center text-white text-[1rem] font-[300] p-[0.3rem] bg-[#2E8E9E]'
-        },
-        bodyCell: {
-          className: 'relative end-0 border-[1px] border-[#2E8E9E] border-l-0 border-r-0 first:border-l-[1px] last:border-r-[1px] bg-transparent text-white text-center font-[300] p-[2rem_0.5rem_0_0.5rem]'
-        }
-      }
-    },
+    dataTableProps: {},
     pagination: {
       paginationProps: {},
       first: 0,
@@ -142,11 +119,49 @@ const BalanceMarketing: NextPageWithLayout = () => {
       totalPages: 0,
       setTotalPages: () => 0,
     },
-    onCustomChange: () => { },
-    styleCustom: ['p-datatable'],
+    onCustomChange: () => {},
+    styleCustom: ['p-datatable', 'p-datatable-tbody-transparent', 'p-datatable-thead'],
   });
   const [expanded, setExpanded] = useState(false);
-  const [cardData, setCardData] = useState<ICardBodyCustom[][]>([]);
+
+  const [cardData, setCardData] = useState<ICardBodyCustom[]>([
+    {
+      body: [
+        {
+          htmlCustomElementType: 'span',
+          classNames: 'ml-[1rem] flex items-end text-[15px] font-[400] leading-none',
+          style: {},
+          value: '',
+          order: '1',
+          fieldfind: 'object_date',
+        },
+        {
+          htmlCustomElementType: 'span',
+          classNames: 'ml-[1rem] flex items-start font-[400] text-[12px] text-[0.8rem] leading-[1.8]',
+          style: {},
+          value: '',
+          order: '3',
+          fieldfind: 'description',
+        },
+        {
+          htmlCustomElementType: 'span',
+          classNames: 'flex justify-end mr-[1rem] items-end text-[11px] font-[400] leading-none',
+          style: {},
+          value: '',
+          order: '2',
+          fieldfind: 'customField',
+        },
+        {
+          htmlCustomElementType: 'span',
+          classNames: 'flex justify-end mr-[1rem] items-start text-[15px] font-[400] leading-[1.4]',
+          style: {},
+          value: '',
+          order: '4',
+          fieldfind: 'related_balance_post_operation',
+        },
+      ],
+    },
+  ]);
 
   const calendarInpt = () => {
     const props: calendarProps = {
@@ -272,9 +287,9 @@ const BalanceMarketing: NextPageWithLayout = () => {
         background: !table.data.body.count || loading ? '#D8D8D8' : ' #2E8E9E',
       },
       className: 'w-[58px] md:w-[80%] lg:w-full md:flex-[1_1_60px] border-2 rounded-2xl',
-      disabled: !table.data.body.results.length,
+      disabled: !table.data.body.count,
       loading: loading,
-      loadingIcon: <SVGComponent path="UI" src="iconSpinner" className="animate-spin absolute m-auto left-4"></SVGComponent>,
+      loadingIcon: <SVGComponent path="UI" src="iconSpinner" className="animate-spin"></SVGComponent>,
     },
     styleClassname: 'borde-0',
     onClickHanbdlerButtonUI: () => {
@@ -287,10 +302,10 @@ const BalanceMarketing: NextPageWithLayout = () => {
         setTimeout(async () => {
           setLoading(true);
           const response = await mutateAsync(newParams); // Esperar a que la mutación se complete
-          if (response.status === 200) {
+          if (response.data) {
             const blob = new Blob([response.data]);
             const a = document.createElement('a');
-            a.download = `Historial de balance ${getDateCutomeString(new Date(), 'desktop')}.csv`;
+            a.download = `Historial de balance ${getDateCutomeString(new Date())}.csv`;
             a.href = URL.createObjectURL(blob);
             const clickEvt = new MouseEvent('click', {
               view: window,
@@ -299,46 +314,72 @@ const BalanceMarketing: NextPageWithLayout = () => {
             });
             a.dispatchEvent(clickEvt);
             a.remove();
+            setLoading(false);
           }
-          setLoading(false);
         }, 1000);
       } catch (error) {
         console.log(error);
-        setLoading(false);
       }
     },
   };
 
   const updateDataTable = (data: IResponseBalanceTypeOperation) => {
-    if (data.results.length) {
-
-      const updatedBody = data.results.map((item: any) => ({
-        ...item,
-        object_date: getDateCutomeString(item.object_date, useMobile ? 'mobile' : 'desktop'),
-      }));
-
-      setTable((prevTable) => ({
-        ...prevTable,
-        dataTableProps: {
-          ...prevTable.dataTableProps
+    data.results = [
+      {
+        object_date: '21 jun 2015',
+        trimester: 'yes',
+        product: 'Dashboard',
+        amount: '180$',
+        description: 'El ROI Promedio de ganancia 85% - 500$',
+        related_balance_post_operation: '900$',
+      },
+      {
+        object_date: '15 jun 2015',
+        trimester: 'yes',
+        product: 'Dashboard',
+        amount: '180$',
+        description: 'El ROI Promedio de ganancia 85% - 500$',
+        related_balance_post_operation: '900$',
+      },
+      {
+        object_date: '20 jun 2015',
+        trimester: 'yes',
+        product: 'Dashboard',
+        amount: '180$',
+        description: 'El ROI Promedio de ganancia 85% - 500$',
+        related_balance_post_operation: '900$',
+      },
+      {
+        object_date: '28 feb 2015',
+        trimester: 'yes',
+        product: 'Dashboard',
+        amount: '180$',
+        description: 'El ROI Promedio de ganancia 85% - 500$',
+        related_balance_post_operation: '900$',
+      },
+    ];
+    const updatedBody = data.results.map((item: any) => ({
+      ...item,
+      object_date: getDateCutomeString(item.object_date),
+    }));
+    setTable((prevTable) => ({
+      ...prevTable,
+      data: {
+        ...prevTable.data,
+        body: {
+          ...data,
+          count: data.count ? data.count : 0,
+          results: updatedBody,
         },
-        data: {
-          ...prevTable.data,
-          body: {
-            ...data,
-            count: data.count ? data.count : 0,
-            results: updatedBody,
-          },
-        },
-        pagination: {
-          first: 0,
-          setFirst: () => 0,
-          totalPages: data.count ? data.count : 1,
-          setTotalPages: () => (data.count ? data.count : 1),
-          paginationProps: {},
-        },
-      }));
-    }
+      },
+      pagination: {
+        first: 0,
+        setFirst: () => 0,
+        totalPages: data.count ? data.count : 1,
+        setTotalPages: () => (data.count ? data.count : 1),
+        paginationProps: {},
+      },
+    }));
   };
 
   const onChangePage = async (event: any) => {
@@ -363,20 +404,17 @@ const BalanceMarketing: NextPageWithLayout = () => {
     ));
   };
 
-  const getDataCardMobile = (table: IResponseBalanceTypeOperation): void => {
+  const getDataCardMobile = (table: IResponseBalanceTypeOperation): ICardBodyCustom[] => {
     const arraykeys: Array<keyof ResultKeysMap[IQueryBalanceTypeOperation['operation_area']]> = table.results.length
       ? (Object.keys(table.results[0]) as Array<keyof ResultKeysMap[IQueryBalanceTypeOperation['operation_area']]>)
       : [];
 
-    const arrayCardStructure: ICardBodyCustom[] =
-      [{
-        dividerParent: 1,
-        htmlCustomParent: 'div',
-        className: 'w-[80%] flex flex-col gap-y-1 ml-2 justify-center',
+    const arrayCardStructure: ICardBodyCustom[] = [
+      {
         body: [
           {
             htmlCustomElementType: 'span',
-            classNames: 'flex items-startw text-[15px] font-[400] leading-none',
+            classNames: 'ml-[1rem] flex items-end text-[15px] font-[400] leading-none',
             style: {},
             value: '',
             order: '1',
@@ -384,50 +422,51 @@ const BalanceMarketing: NextPageWithLayout = () => {
           },
           {
             htmlCustomElementType: 'span',
-            classNames: 'flex justify-start items-end text-[11px] font-[400] leading-none',
+            classNames: 'mt-[0.5rem] ml-[1rem] flex items-start font-[400] text-[12px] text-[0.8rem] leading-none',
             style: {},
             value: '',
-            order: '2',
+            order: '3',
             fieldfind: 'description',
           },
-        ],
-      },
-      {
-        htmlCustomParent: 'div',
-        dividerParent: 2,
-        className: 'flex-1 flex flex-col items-end mr-2 mt-1 gap-y-1 justify-center leading-[1]',
-        body: [
           {
             htmlCustomElementType: 'span',
-            classNames: 'flex items-end font-[400] text-[8px] text-[0.8rem] leading-none',
+            classNames: 'flex justify-end mr-[1rem] items-end text-[11px] font-[400] leading-none',
             style: {},
-            value: `${table.results.length ? 'Balance' : ''}`,
-            order: '1',
+            value: table.results.length ? 'Balance' : '',
+            order: '2',
             fieldfind: 'customField',
           },
           {
             htmlCustomElementType: 'span',
-            classNames: 'ml-[1rem] flex items-start font-[400] text-[14px] text-[0.8rem] leading-none',
+            classNames: 'mt-[0.2rem] flex justify-end mr-[1rem] items-start text-[15px] font-[400]',
             style: {},
             value: '',
-            order: '2',
-            fieldfind: 'amount',
+            order: '4',
+            fieldfind: 'related_balance_post_operation',
           },
-        ]
-      }];
+        ],
+      },
+    ];
 
-    const dataCard: IResponseBalanceTypeOperation = !table.results.length ? createEmptyRowArrayCustom(5, table) : table;
+    const dataCard: IResponseBalanceTypeOperation = !table.results.length ? createEmptyRowArrayCustom(10, table) : table;
     return setDataCardMobile(dataCard, arrayCardStructure, arraykeys, !table.results.length ? true : false);
   };
 
   const setDataCardMobile = (
-    dataCard: IResponseBalanceTypeOperation,
+    data: IResponseBalanceTypeOperation,
     arrayStructure: ICardBodyCustom[],
     arrayKeys: Array<keyof ResultKeysMap[IQueryBalanceTypeOperation['operation_area']]>,
     showMessage: boolean
-  ): void => {
+  ) => {
+    console.log(arrayKeys);
     const divCard = document.getElementById('card-ui');
     const divEmptyExist = document.getElementById('empty-card');
+
+    if (data.results.length) {
+      data.results.forEach((item: any) => {
+        item.object_date = getDateCutomeString(item.object_date);
+      });
+    }
 
     if (!divEmptyExist && showMessage) {
       const propietariesDiv = {
@@ -449,9 +488,50 @@ const BalanceMarketing: NextPageWithLayout = () => {
     if (!showMessage) {
       divEmptyExist?.remove();
     }
-
-    const result = buildArrayResultCard(dataCard, arrayStructure, arrayKeys);
+    //corregr esta logic esta mal indexado el acceso a las llaves
+    const result: ICardBodyCustom[] = data.results.flatMap((body) => {
+      return arrayStructure.map((data) => ({
+        body: data.body.map((item, index) => ({
+          ...item,
+          value: item.fieldfind !== 'customField' && arrayKeys ? body[arrayKeys[index]] : item.value,
+        })),
+      }));
+    });
+    console.log(result);
     setCardData(result);
+    return result;
+  };
+
+  const child = (data: ICardBodyCustom[]): React.ReactNode => {
+    return data.map((dataItem, i) => (
+      <div
+        key={i}
+        className="boder-2 grid h-[60px] grid-cols-2 grid-rows-2 rounded-xl bg-[#1F222B] text-[#FFF]"
+        style={{
+          gridTemplateColumns: '3fr 1fr',
+        }}>
+        {dataItem.body.map((item, j) => (
+          <>
+            {item.htmlCustomElementType === 'span' && (
+              <span
+                key={j}
+                className={item.classNames}
+                style={{
+                  order: `${item.order}`,
+                }}>
+                {item.value}
+              </span>
+            )}
+            {item.htmlCustomElementType === 'img' && <SVGComponent key={j} path="UI" src={item.value} />}
+            {item.htmlCustomElementType === 'p' && (
+              <p key={j} className={item.classNames}>
+                {item.value}
+              </p>
+            )}
+          </>
+        ))}
+      </div>
+    ));
   };
 
   const childrenButton = () => {
@@ -484,17 +564,6 @@ const BalanceMarketing: NextPageWithLayout = () => {
   };
 
   useEffect(() => {
-    if (!updateTable) {
-      updateDataTable(table.data.body)
-      setUpdateTable(true);
-    }
-  }, [])
-
-  useEffect(() => {
-    useMobile && getDataCardMobile(table.data.body);
-  }, [updateTable])
-
-  useEffect(() => {
     const handleKeyPress = (event: any) => {
       if (event.key === 'Enter') {
         event.preventDefault();
@@ -513,17 +582,13 @@ const BalanceMarketing: NextPageWithLayout = () => {
   }, [expanded]);
 
   useEffect(() => {
-    if (isExtended && expanded) {
-      setExpanded(false);
-    }
-  }, [isExtended, expanded]);
-
-  useEffect(() => {
-    if (data?.results.length) {
+    if (data) {
       updateDataTable(data);
       useMobile && getDataCardMobile(data);
     }
   }, [data]);
+
+  useEffect(() => {}, [table]);
 
   useEffect(() => {
     setTable((prevTable) => ({
@@ -535,19 +600,6 @@ const BalanceMarketing: NextPageWithLayout = () => {
   }, [isLoading]);
 
   useEffect(() => {
-    setTable((prevTable) => ({
-      ...prevTable,
-      pagination: {
-        first: 0,
-        setFirst: () => 0,
-        totalPages: 10,
-        setTotalPages: () => (1),
-        paginationProps: {},
-      },
-    }));
-  }, [isError])
-
-  useEffect(() => {
     setParams((prevParams) => ({
       ...prevParams,
       object_date: date ? getDateISO(date as string) : null,
@@ -555,11 +607,17 @@ const BalanceMarketing: NextPageWithLayout = () => {
     }));
   }, [date]);
 
+  useEffect(() => {
+    if (isExtended && expanded) {
+      setExpanded(false);
+    }
+  }, [isExtended, expanded]);
+
   return (
-    <div className="flex flex-col w-full items-center justify-center gap-3 md:gap-6">
-      <div className="mt-5 flex w-full flex-row justify-center h-[45px] md:h-[54px]">
+    <div className="flex w-full flex-col items-center justify-center gap-3 md:gap-6">
+      <div className="mt-5 flex w-full flex-row justify-center">
         <TitleUI
-          title={useMobile ? 'BALANCE DE COFUNDADOR PUBLICIDAD' : "BALANCE DE COFUNDADOR / PUBLICIDAD"}
+          title="BALANCE DE COFUNDADOR / PUBLICIDAD"
           urlImage={imageTitle}
           transparent
           onClickHandler={{
@@ -568,8 +626,9 @@ const BalanceMarketing: NextPageWithLayout = () => {
               router.push('/admin/cofounder');
             },
           }}
-          className={`relative flex w-full flex-row ${(expanded && useTablet) ? 'justify-start' : 'justify-center'
-            } justify-items-stretch text-center`}>
+          className={`relative flex w-full flex-row ${
+            (useDesktop && isExtended && !useMobile) || (expanded && useDesktop) ? 'justify-start' : 'justify-center'
+          } justify-items-stretch text-center`}>
           {!useIsMobile() && childrenButton()}
         </TitleUI>
       </div>
@@ -583,7 +642,7 @@ const BalanceMarketing: NextPageWithLayout = () => {
             pagination={table.pagination}
             urlImage={table.urlImage}
             dataTableProps={{}}>
-            {child(cardData, `flex h-[70px] flex-row rounded-xl bg-[#1F222B] text-[#FFF]`)}
+            {child(cardData)}
           </CardUI>
 
           {isLoading && (
@@ -598,7 +657,6 @@ const BalanceMarketing: NextPageWithLayout = () => {
           urlImage={table.urlImage}
           style={table.style}
           dataTableProps={table.dataTableProps}
-          columnProps={table.columnProps}
           onCustomChange={onChangePage}
           styleCustom={table.styleCustom}
           pagination={table.pagination}
@@ -608,8 +666,8 @@ const BalanceMarketing: NextPageWithLayout = () => {
   );
 };
 
-BalanceMarketing.getLayout = function getLayout(page: ReactElement) {
+ProductMarketing.getLayout = function getLayout(page: ReactElement) {
   return <Layout>{page}</Layout>;
 };
 
-export default BalanceMarketing;
+export default ProductMarketing;

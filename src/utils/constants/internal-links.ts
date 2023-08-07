@@ -8,7 +8,7 @@ enum PageLinks {
 
 export enum PageDashboardLinks {
   Dashboard = '/admin',
-  History = '/admin/transactions',
+  History = '/admin/history',
   Profits = '/admin/profits',
   Investments = '/admin/investments',
   InvestmentsNew = '/admin/investments/new',
@@ -21,8 +21,9 @@ export enum PageDashboardLinks {
   Benefits = '/admin/benefits',
   Streaming = '/admin/streaming',
   News = '/admin/news',
-  Confounder = '/admin/cofounder',
-  Trading = '/admin/trading-plans',
+  CodeReffered = "/admin/code-referred",
+  Cofounder = "/admin/cofounder",
+  Trading = "/admin/trading-plans",
 }
 
 export default PageLinks;

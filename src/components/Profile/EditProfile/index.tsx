@@ -16,8 +16,11 @@ import InputProfile from '@/components/UI/InputProfile';
 
 import { IProfile } from '@/api/types/util';
 
+interface EditProfile extends IProfile {
+  setVisibleModal: (visible : boolean ) => void;
+}
 
-const EditProfile: FC<IProfile> = ({ data, changeView }) => {
+const EditProfile: FC<EditProfile> = ({ data, changeView, setVisibleModal }) => {
   const updateEditUserMutation = useUpdateEditUser();
 
   const { control, handleSubmit } = useForm<IResponseGetUserData>({
@@ -29,15 +32,13 @@ const EditProfile: FC<IProfile> = ({ data, changeView }) => {
 
   const showDataFromForm = async (form : any) => {
     console.log('🚀 ~ file: index.tsx:31 ~ onSubmitHandler ~ data:', form);
+    setVisibleModal(true);
     try {
       //TODO: Spinner of loading
       const response = await updateEditUserMutation.mutateAsync({
         id: data?.id,
         ...form,
-      })
-
-        changeView();
-      //TODO: Modals for update profile
+      }).then(() => changeView);
     } catch (error) {
       //TODO: Modals for error
     }
@@ -88,7 +89,9 @@ const EditProfile: FC<IProfile> = ({ data, changeView }) => {
       </div>
       <button
         className="absolute -top-3 right-16 grid h-[55px] w-[55px] place-content-center rounded-b-3xl bg-primary p-4 text-white xl:h-[75px] xl:w-[75px]"
-        type="submit">
+        type="submit"
+        //onClick={changeView}
+        >
         <Image src={SaveIcon} alt="" className="w-8" />
       </button>
     </form>

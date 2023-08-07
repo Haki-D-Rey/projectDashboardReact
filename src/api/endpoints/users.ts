@@ -1,4 +1,4 @@
-import { ApiClientV1, ApiClientV2 } from '../index';
+import { ApiClientV1,ApiClientV2 } from '../index';
 import type {
   IMutationResetPasswordArgs,
   IMutationEditUserArgs,

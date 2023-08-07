@@ -103,7 +103,7 @@ export interface IQueryBalanceTypeOperation {
   page_size?: '10' | string;
   page?: string;
   ordering?: string;
-  operation_area: 'general' | 'kitplan' | 'trading' | 'cofounder' | 'withdrawal' |'transaction';
+  operation_area: 'general' | 'kitplan' | 'trading' | 'cofounder' | 'withdrawal';
 }
 
 export type ResultKeysMap = {
@@ -135,13 +135,6 @@ export type ResultKeysMap = {
     amount: string;
     transaction_hash: string;
     source_of_profit: string;
-  }
-  transaction: {
-    transaction_date: string;
-    description: string;
-    amount: string;
-    wallet_network: string;
-    status: string;
   }
 };
 

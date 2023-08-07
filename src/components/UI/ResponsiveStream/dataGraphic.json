@@ -1,0 +1,92 @@
+[
+    {
+      "id": "Producto Wallet",
+      "data": [
+        {
+          "x": "enero",
+          "y": 60
+        },
+        {
+          "x": "febrero",
+          "y": 35
+        },
+        {
+          "x": "marzo",
+          "y": 30
+        },
+        {
+          "x": "abril",
+          "y": 40
+        },
+        {
+          "x": "mayo",
+          "y": 70
+        },
+        {
+          "x": "junio",
+          "y": 10
+        }
+      ]
+    },
+    {
+      "id": "Producto Trading",
+      "data": [
+        {
+          "x": "enero",
+          "y": 5
+        },
+        {
+          "x": "febrero",
+          "y": 25
+        },
+        {
+          "x": "marzo",
+          "y": 15
+        },
+        {
+          "x": "abril",
+          "y": 10
+        },
+        {
+          "x": "mayo",
+          "y": 8
+        },
+        {
+          "x": "junio",
+          "y": 25
+        }
+      ]
+    },
+    {
+      "id": "Producto Dashboard",
+      "data": [
+        {
+          "x": "enero",
+          "y": 6
+        },
+        {
+          "x": "febrero",
+          "y": 50
+        },
+        {
+          "x": "marzo",
+          "y": 25
+        },
+        {
+          "x": "abril",
+          "y": 15
+        },
+        {
+          "x": "mayo",
+          "y": 20
+        },
+        {
+          "x": "junio",
+          "y": 40
+        }
+      ]
+    }
+    
+  ]
+  
+  

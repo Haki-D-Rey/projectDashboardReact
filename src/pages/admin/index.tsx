@@ -1,45 +1,58 @@
 import React, { ReactElement } from 'react';
 
-import Layout from '@/components/Layout';
-import NoVerified from '@/components/Layout/NoVerified';
+import { useAppSelector } from '@/hooks/redux.hook';
+import { getExtendedMenu } from '@/redux/features/appSlice';
 
-import { Card } from 'primereact/card';
+import dynamic from 'next/dynamic';
+import dataTest from '@/components/Overview/graphic.json';
+import { ILineColors } from '@/api/types/util';
+
+import Layout from '@/components/Layout';
+import { LegendItem, ProfitCard } from '@/components/UI/ProfitLegend';
+
+import Graphic from '@/components/UI/ResponsiveStream';
+
+import Coin from '/public/assets/assets-globals/coin.svg';
+import Coat from 'public/assets/assets-globals/coatMoney.svg';
+import Gentleman from 'public/assets/assets-globals/gentlemanCo.svg'
 
 import { NextPageWithLayout } from '../_app';
+import Card from '@/components/Overview/Bubbles/Card';
+
+ const CoinMarketCapWidgetNoSSR = dynamic(() => import('../../components/UI/CryptoWidget'), { ssr: true });
 
 const Admin: NextPageWithLayout = () => {
+  const isExtended = useAppSelector(getExtendedMenu);
+
+  const lineColors: ILineColors = {
+    "Balance de trading plan": "#FF981D",
+    "Balance de kit plan": "#2FD1CD ",
+    "Balance de cofundadores": "#1A77B5",
+  };
+
   return (
-    <div className="grid flex-grow grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 px-3 py-4">
-      <Card title="Balance de Trading Plan" style={{ backgroundColor: '#071426' }}>
-        <p className="text-3xl md:text-5xl font-bold text-yellow-500">$ 500.00</p>
-        <p className="text-2xl font-bold text-green-500">+$ 50.00</p>
-      </Card>
-      <Card title="Balance de Kit Plans" style={{ backgroundColor: '#071426' }}>
-        <p className="text-3xl md:text-5xl font-bold text-yellow-500">$ 20.00</p>
-      </Card>
-      <Card title="Balance de Co-fundador" style={{ backgroundColor: '#071426' }}>
-        <p className="text-3xl md:text-5xl font-bold text-yellow-500">$ 500.00</p>
-      </Card>
-      
-      <Card title="Balance de Trading Plan en revision" style={{ backgroundColor: '#071426' }}>
-        <p className="text-3xl md:text-5xl font-bold text-yellow-500">$ 500.00</p>
-      </Card>
+    <div className="mx-auto flex flex-col justify-around gap-8 items-center h-full w-[110%] lg:-ml-12 xl:w-full max-w-[1300px]">
+      <div className='h-[50px] overflow-hidden rounded-lg w-[98%]'>
+       <CoinMarketCapWidgetNoSSR />
+      </div>
 
-      <Card title="Balance de Kit Plans en revisión" style={{ backgroundColor: '#071426' }}>
-        <p className="text-3xl md:text-5xl font-bold text-yellow-500">$ 500.00</p>
-      </Card>
+      <div className={`flex h-auto w-[98%] items-center ${isExtended ? 'lg:gap-20 xl:gap-[110px]' : 'lg:gap-24 xl:gap-39 2xl:gap-40'}  md:h-auto xl:justify-start p-2 `}>
+        <Card title="Kit Plans" investmentCost="100.00" monthlyProfit="1.20" icon={Coat} hasFunnel={true} />
+        <Card title="Trading Plan" investmentCost="500.00" monthlyProfit="3.25" networkGain="0.25" icon={Coin} />
+        <Card title="Confundadores" investmentCost="1,000.00" monthlyProfit="3.75" icon={Gentleman} />
+      </div>
 
-      <Card title="Balance de Co-fundador en revisión" style={{ backgroundColor: '#071426' }}>
-        <p className="text-3xl md:text-5xl font-bold text-yellow-500">$ 500.00</p>
-      </Card>
-      
-      <Card 
-        style={{ backgroundColor: '#071426', textAlign: 'center' }} 
-        className="lg:col-span-3 flex justify-center items-center"
-      >
-        <h3 className='text-2xl lg:text-[56px] font-bold'>Ganacias totales</h3>
-        <p className='text-2xl lg:text-[56px] font-bold text-[#27D323] pt-3 md:pt-8'>$ 00.00</p>
-      </Card>
+      <div className="flex lg:h-[40%] w-[98%] sm:flex-col lg:flex-row md:justify-center p-2">
+        <div className="w-[33%] flex md:flex-row lg:flex-col gap-2 justify-around">
+          <ProfitCard name='Ganancias Históricas' profit='8.18' isCofounder={false} />
+          <LegendItem itemList={['Balance de Kit Plans', 'Balance de Trading Plan', 'Balance de Cofundadores']} isCofounder={false}/>
+        </div>
+
+        <div className="w-[67%] ">
+            <Graphic data={dataTest} tickValues={[0, 100, 200, 300, 400, 500]} nMax={500} lineColors={lineColors}/>
+        </div>
+
+      </div>
     </div>
   );
 };

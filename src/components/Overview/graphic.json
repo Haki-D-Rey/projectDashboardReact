@@ -1,0 +1,89 @@
+[
+    {
+      "id": "Balance de trading plan",
+      "data": [
+        {
+          "x": "enero",
+          "y": 300
+        },
+        {
+          "x": "febrero",
+          "y": 60
+        },
+        {
+          "x": "marzo",
+          "y": 75
+        },
+        {
+          "x": "abril",
+          "y": 40
+        },
+        {
+          "x": "mayo",
+          "y": 20
+        },
+        {
+          "x": "junio",
+          "y": 80
+        }
+      ]
+    },
+    {
+      "id": "Balance de kit plan",
+      "data": [
+        {
+          "x": "enero",
+          "y": 200
+        },
+        {
+          "x": "febrero",
+          "y": 40
+        },
+        {
+          "x": "marzo",
+          "y": 60
+        },
+        {
+          "x": "abril",
+          "y": 80
+        },
+        {
+          "x": "mayo",
+          "y": 90
+        },
+        {
+          "x": "junio",
+          "y": 60
+        }
+      ]
+    },
+    {
+      "id": "Balance de cofundadores",
+      "data": [
+        {
+          "x": "enero",
+          "y": 10
+        },
+        {
+          "x": "febrero",
+          "y": 60
+        },
+        {
+          "x": "marzo",
+          "y": 80
+        },
+        {
+          "x": "abril",
+          "y": 40
+        },
+        {
+          "x": "mayo",
+          "y": 85
+        },
+        {
+          "x": "junio",
+          "y": 20
+        }
+      ]
+    }
+  ]

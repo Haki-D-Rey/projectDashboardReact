@@ -11,10 +11,10 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux.hook';
 import { getExtendedMenu, getVisibleMenu } from '@/redux/features/appSlice';
 import { toogleVisibleMenu, toogleExtendedMenu } from '@/redux/features/appSlice';
 import PrivatePage from '@/hoc/PrivatePage';
-import NoVerified from './NoVerified';
-import Footer from './Footer';
 
 import { useRouter } from 'next/router';
+import { twMerge } from 'tailwind-merge';
+import NoVerified from './NoVerified';
 
 interface ILayoutProps {
   hideSideBar?: boolean;
@@ -56,9 +56,11 @@ const Layout: FC<ILayoutProps> = ({ children, hideSideBar }) => {
             <SideBar isExtended={isExtended} isMobileOrTablet={isMobileOrTablet} visible={showSideBar} handleSideBar={handleSideBar} />
           )}
 
-          <div className="container mx-auto flex flex-grow flex-col overflow-y-auto overflow-x-hidden">
-            <div className="m-2 flex items-center flex-grow flex-col md:m-4 md:ml-0">
-              {isLoading ? <ProgressSpinner /> : data?.email_verified ? children : <NoVerified dataUser={data} />}
+          <div className='w-full overflow-y-auto'>
+            <div className={twMerge("flex flex-grow flex-col overflow-y-hidden overflow-x-hidden mt-[2rem] w-[100%]", isExtended ? 'px-[3.5rem]' : 'px-[6rem]')}>
+              <div className="flex items-center flex-grow flex-col">
+                {isLoading ? <ProgressSpinner /> : data?.email_verified ? children : <NoVerified dataUser={data} />}
+              </div>
             </div>
           </div>
         </div>
